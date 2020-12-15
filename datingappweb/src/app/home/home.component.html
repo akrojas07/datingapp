@@ -1,3 +1,57 @@
-<div class="homebody">
-  <h1>Corona Dating</h1>
+<!-- When not logged in -->
+<div class="container mt-5">
+  <div *ngIf="!registerMode">
+    <h1>Find your perfect match</h1>
+    <p class="lead">Come on in to view your perfect match! All you need to do is sign up!</p>
+    <div class="text-center">
+        <button class="btn" (click)="registerToggle()">
+          Register
+        </button>
+        <button class="btn">Learn More! </button>
+    </div>
+  </div>
 </div>
+
+<!-- when someone clicks on the register button -->
+<div class="container" *ngIf="registerMode">
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <form #registerForm = "ngForm" (ngSubmit)="register()">
+        <h2 class="text-center">
+          Sign up!
+        </h2>
+        <hr>
+        <div class="form-group">
+          <div class="form-group">
+            <input type = "text" class="form-control" name = "newFirstName"
+            [(ngModel)]="newUser.FirstName"
+            placeholder="First Name"
+            >
+          </div>
+          <div class="form-group">
+            <input type = "text" class="form-control" name = "newLastName"
+            [(ngModel)]="newUser.LastName"
+            placeholder="Last Name"
+            >
+          </div>
+          <input type="text" class="form-control" name="newUsername" 
+          [(ngModel)]="newUser.Username"
+          placeholder="Username">
+        </div>
+        <div class="form-group">
+          <input type = "password" class="form-control" name = "newPassword"
+          [(ngModel)]="newUser.Password"
+          placeholder="Password"
+          >
+        </div>
+        <button class="btn" type= "submit" (submit) ="register()">
+          Register
+        </button>
+        <button class="btn" type="button" (click) = "cancel()">
+          Cancel
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
