@@ -3,8 +3,11 @@
 
     <div class="row">
       <div class="col-12">
-        <div class="alert" *ngIf="basicForm.dirty">
+        <div class="alert alert-warning" *ngIf="basicForm.dirty">
           <strong>You have made changes to your profile. Any unsaved changes will be lost.</strong>
+        </div>
+        <div class="alerts" *ngIf="updated">
+          <strong>Your changes have been saved!</strong>
         </div>
       </div>
     </div>
@@ -33,12 +36,15 @@
     
       <div class="col-7">
         <h2>About you</h2>
-        <textarea class="form-control"></textarea>
+        <textarea class="form-control" rows="6">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut numquam maxime minus cumque, eaque laborum, quis ipsa libero at omnis atque consequatur necessitatibus laboriosam tempora cupiditate. At rerum aliquid consequatur.</textarea>
 
         <h2 class="mt-4">Looking for</h2>
-        <textarea class="form-control"></textarea>
+        <textarea class="form-control" rows="6">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi ipsam obcaecati, placeat temporibus voluptatum minus tenetur cum aliquid cumque suscipit hic beatae! Suscipit libero assumenda eum voluptate deleniti reprehenderit facilis?
+
+        </textarea>
         <h2 class="mt-4">Interests</h2>
-        <textarea class="form-control"></textarea>
+        <textarea class="form-control" rows="6">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur provident non ullam voluptatem, perspiciatis quae dignissimos eligendi quidem error asperiores deleniti? Enim vitae quod rem recusandae reprehenderit animi voluptatum itaque.
+        </textarea>
       </div>
     
     
