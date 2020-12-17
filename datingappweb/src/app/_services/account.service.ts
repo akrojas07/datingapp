@@ -7,6 +7,7 @@ import { UserLoginRequest } from '../_models/_userModels/UserLoginRequest';
 import { UserLoginResponse } from '../_models/_userModels/UserLoginResponse';
 import { CreateNewUserRequest } from '../_models/_userModels/CreateNewUserRequest';
 import { GetUsersByUserIdResponse } from '../_models/_userModels/GetUsersByUserIdResponse';
+import { UpdateProfileRequest } from '../_models/_userModels/UpdateProfileRequest';
 
 @Injectable({
   providedIn: 'root',
@@ -36,7 +37,7 @@ export class AccountService {
   }
 
   logout(username: string){
-    return this.http.patch(this.baseUrl + 'logout', username);
+    return this.http.patch(this.baseUrl + 'user/logout', username);
   }
 
   loggedIn():boolean{
@@ -49,6 +50,10 @@ export class AccountService {
     {
       return false;
     }
+  }
+
+  updateProfile(model: UpdateProfileRequest){
+    return this.http.put(this.baseUrl +'user/update/profile', model);
   }
 
 }

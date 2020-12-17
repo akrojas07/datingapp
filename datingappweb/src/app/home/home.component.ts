@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AccountService} from '../_services/account.service';
 import { GetUsersByUserIdResponse} from '../_models/_userModels/GetUsersByUserIdResponse';
-import { UserLoginRequest } from '../_models/_userModels/UserLoginRequest';
-import { dashCaseToCamelCase } from '@angular/compiler/src/util';
+
 import { CreateNewUserRequest } from '../_models/_userModels/CreateNewUserRequest';
+
 
 @Component({
   selector: 'app-home',
@@ -19,33 +19,20 @@ export class HomeComponent implements OnInit {
   registerMode: boolean;
   newUser: CreateNewUserRequest;
 
+  @ViewChild('registerForm') registerForm;  
 
   constructor(private accountServices: AccountService,
     private router: Router) { }
 
   ngOnInit() {
     this.loggedIn(); 
-    //this.getUsersByUserId([1]);
     this.registerMode = false;
     this.newUser = new CreateNewUserRequest();
   }
 
-  getUsersByUserId(ids:number[]): void{
-    this.users = [];
-
-    this.accountServices.getUsersByUserId(ids).subscribe(
-      response => {
-        console.log(response);
-        this.users = response;
-      },
-      error =>{
-        console.log(error);
-      }
-    );
-  }
-
   loggedIn(){
     this.signedIn = this.accountServices.loggedIn(); 
+    return this.signedIn;
   }
 
   registerToggle(){
@@ -53,18 +40,21 @@ export class HomeComponent implements OnInit {
   }
 
   register(){
-    console.log(this.newUser);
     this.accountServices.createNewUser(this.newUser).subscribe(
       response => {
         localStorage.setItem('token', response.token);
         localStorage.setItem('un', response.un);
+        localStorage.setItem('fn', response.fn);
+        localStorage.setItem('ln', response.ln);
         this.signedIn = this.accountServices.loggedIn();
-        this.router.navigateByUrl('/matches');
+        this.router.navigateByUrl('/home');
+        this.registerForm.reset();
       }
     );
   }
 
   cancel(){
-    console.log("cancelled");
+    this.registerForm.reset();
+    this.registerMode = false;
   }
 }

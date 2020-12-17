@@ -1,57 +1,125 @@
 <!-- When not logged in -->
-<div class="container mt-5">
-  <div *ngIf="!registerMode">
-    <h1>Find your perfect match</h1>
-    <p class="lead">Come on in to view your perfect match! All you need to do is sign up!</p>
-    <div class="text-center">
-        <button class="btn" (click)="registerToggle()">
+<div class="container-fluid">
+  <div *ngIf="!loggedIn()" class="homebody">
+    <!-- before register button is clicked -->
+    <div *ngIf="!registerMode" class="justify-content-center text-center">
+      <h2 class="mt-2 pt-5">Find your perfect match</h2>
+      <p class="lead  mt-5">Come on in to view your perfect match! All you need to do is sign up!</p>
+      <div class="text-center">
+        <button class="btn buttons mt-3" (click)="registerToggle()">
           Register
         </button>
-        <button class="btn">Learn More! </button>
+      </div>
+    </div>
+
+    <!-- when someone clicks on the register button -->
+    <div *ngIf="registerMode">
+      <div class="row justify-content-center">
+        <div class="col-4 card">
+          <h2 class="text-center mt-3 card-title">
+            Sign up!
+          </h2>
+          <hr>
+          <div class="card-body">
+            <form #registerForm="ngForm" (ngSubmit)="register()">
+
+
+              <div class="form-group">
+                <div class="form-group">
+                  <input type="text" class="form-control" name="newFirstName" [(ngModel)]="newUser.FirstName"
+                    placeholder="First Name">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" name="newLastName" [(ngModel)]="newUser.LastName"
+                    placeholder="Last Name">
+                </div>
+                <input type="text" class="form-control" name="newUsername" [(ngModel)]="newUser.Username"
+                  placeholder="Username">
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" name="newPassword" [(ngModel)]="newUser.Password"
+                  placeholder="Password">
+              </div>
+              <button class="btn buttons mb-3" type="submit" (submit)="register()">
+                Sign up
+              </button>
+              <button class="btn cancelButton  ml-2 mb-3" type="button" (click)="cancel()">
+                Cancel
+              </button>
+            </form>
+          </div>
+
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- when someone clicks on the register button -->
-<div class="container" *ngIf="registerMode">
-  <div class="row justify-content-center">
+
+<!-- When logged in -->
+<div class="container" *ngIf="loggedIn()">
+  <h2 class="text-center"> Welcome to your happily ever after</h2>
+  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illum at, officia nam ab dolorem doloribus incidunt quae
+    tempore minus. Enim aliquam recusandae consectetur est blanditiis. Aliquid adipisci fuga alias suscipit.</p>
+
+  <div class="row">
     <div class="col-4">
-      <form #registerForm = "ngForm" (ngSubmit)="register()">
-        <h2 class="text-center">
-          Sign up!
-        </h2>
-        <hr>
-        <div class="form-group">
-          <div class="form-group">
-            <input type = "text" class="form-control" name = "newFirstName"
-            [(ngModel)]="newUser.FirstName"
-            placeholder="First Name"
-            >
-          </div>
-          <div class="form-group">
-            <input type = "text" class="form-control" name = "newLastName"
-            [(ngModel)]="newUser.LastName"
-            placeholder="Last Name"
-            >
-          </div>
-          <input type="text" class="form-control" name="newUsername" 
-          [(ngModel)]="newUser.Username"
-          placeholder="Username">
+      <div class="card">
+        <img class="card-img-top" src="https://picsum.photos/id/1013/500/500">
+        <div class="card-body">
+          <p class="card-title lead">
+            Lorem ipsum dolor sit, amet consectetur
+          </p>
+          <p class="card-text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum voluptatum neque deleniti quos voluptas
+            nesciunt, sint incidunt magni tenetur sed ex temporibus earum quidem sequi, veritatis omnis fugiat
+            obcaecati! Reprehenderit?
+          </p>
         </div>
-        <div class="form-group">
-          <input type = "password" class="form-control" name = "newPassword"
-          [(ngModel)]="newUser.Password"
-          placeholder="Password"
-          >
+      </div>
+    </div>
+
+    <div class="col-4">
+
+      <div class="card">
+        <img class="card-img-top" src="https://picsum.photos/id/1004/500" alt="Couple kissing in the rain">
+        <div class="card-body">
+          <p class="lead">
+            Accusantium modi unde dolorem, velit commodi magni.
+          </p>
+          <p class="card-text">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia, eum consequatur labore asperiores
+            cupiditate corrupti accusantium modi unde dolorem, cum quaerat ab consectetur dolore ad temporibus velit
+            commodi magni. Voluptates?
+          </p>
         </div>
-        <button class="btn" type= "submit" (submit) ="register()">
-          Register
-        </button>
-        <button class="btn" type="button" (click) = "cancel()">
-          Cancel
-        </button>
-      </form>
+      </div>
+
+    </div>
+
+    <div class="col-4">
+
+      <div class="card">
+
+        <img class="card-img-top" src="https://picsum.photos/id/1083/1200">
+        <div class="card-body">
+          <div>
+            <p class="lead mt-3">
+              Lorem Lorem ipsum dolor sit
+            </p>
+            <p class="card-text mt-3">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora beatae odio officiis nemo rerum fugit,
+              ratione quas corrupti dolorum dolore, facere accusantium doloribus. Ad adipisci impedit facere molestiae
+              debitis temporibus.
+            </p>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
-</div>
 
+
+
+
+</div>

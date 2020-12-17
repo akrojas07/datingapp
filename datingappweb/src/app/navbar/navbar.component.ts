@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserLoginRequest } from '../_models/_userModels/UserLoginRequest';
 import { AccountService } from '../_services/account.service';
@@ -10,9 +10,11 @@ import { AccountService } from '../_services/account.service';
 })
 export class NavbarComponent implements OnInit {
   model: any = { };
-  loggedIn: boolean;
   collapsed: boolean;
   loginModel: UserLoginRequest;
+  loggedIn:boolean; 
+
+  @ViewChild('loginForm') loginForm;
 
   constructor(private accountServices: AccountService,
               private router: Router) { }
@@ -28,14 +30,17 @@ export class NavbarComponent implements OnInit {
       response => {
         localStorage.setItem('token', response.token);
         localStorage.setItem('un', response.un);
+        localStorage.setItem('fn', response.fn);
+        localStorage.setItem('ln', response.ln);
         this.loggedIn = true;
-        this.router.navigateByUrl('/matches');
+        this.router.navigateByUrl('/home');
+        this.loginForm.reset();
       }
     );
   }
   
   signedIn(){
-    this.loggedIn = this.accountServices.loggedIn();
+    return this.accountServices.loggedIn();
   }
 
   logout(): void{

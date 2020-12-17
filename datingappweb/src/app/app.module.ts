@@ -11,7 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { MatchesComponent } from './matches/matches.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChatsComponent } from './chats/chats.component';
-import { MemberdetailComponent} from './profile/memberdetail/memberdetail.component';
+import { MemberdetailComponent} from './matches/memberdetail/memberdetail.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
