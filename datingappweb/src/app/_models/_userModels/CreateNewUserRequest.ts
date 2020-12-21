@@ -3,4 +3,5 @@ export class CreateNewUserRequest {
     LastName: string;
     Username: string;
     Password: string; 
+    PhotoId: number; 
 }

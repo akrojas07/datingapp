@@ -32,6 +32,7 @@ export class NavbarComponent implements OnInit {
         localStorage.setItem('un', response.un);
         localStorage.setItem('fn', response.fn);
         localStorage.setItem('ln', response.ln);
+        localStorage.setItem('url', response.url);
         this.loggedIn = true;
         this.router.navigateByUrl('/home');
         this.loginForm.reset();

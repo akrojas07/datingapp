@@ -40,12 +40,14 @@ export class HomeComponent implements OnInit {
   }
 
   register(){
+    // console.log(this.newUser.Picture);
     this.accountServices.createNewUser(this.newUser).subscribe(
       response => {
         localStorage.setItem('token', response.token);
         localStorage.setItem('un', response.un);
         localStorage.setItem('fn', response.fn);
         localStorage.setItem('ln', response.ln);
+        localStorage.setItem('url', response.url);
         this.signedIn = this.accountServices.loggedIn();
         this.router.navigateByUrl('/home');
         this.registerForm.reset();

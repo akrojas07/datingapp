@@ -3,4 +3,5 @@ export class UserLoginResponse {
     token: string;
     fn: string;
     ln: string;
+    url: string;
 }

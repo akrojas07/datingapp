@@ -3,4 +3,6 @@ export class UpdateProfileRequest {
     LastName: string;
     Password: string;
     Username: string;
+    PhotoId: number;
+    Url: string;
 }
