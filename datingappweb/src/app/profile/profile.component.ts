@@ -20,12 +20,26 @@ export class ProfileComponent implements OnInit {
     this.member.Username = localStorage.getItem('un');
     this.member.FirstName = localStorage.getItem('fn');
     this.member.LastName = localStorage.getItem('ln');
-    this.member.Url = localStorage.getItem('url');
+
     this.updated = false;
+    this.photoFound(); 
   }
 
   changeUpdatedStatus() {
     this.updated = !this.updated;
+  }
+
+  photoFound(){
+    let url = localStorage.getItem('url');
+    console.log(typeof(url));
+    if(url !== 'null' && url !== '')
+    {
+      this.member.Url = url;
+    }
+    else
+    {
+      this.member.Url = 'assets/images/No_Image.png';
+    }
   }
 
   updateProfile() {
