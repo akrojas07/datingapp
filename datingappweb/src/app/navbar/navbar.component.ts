@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserLoginRequest } from '../_models/_userModels/UserLoginRequest';
 import { AccountService } from '../_services/account.service';
 
 @Component({
@@ -9,34 +10,44 @@ import { AccountService } from '../_services/account.service';
 })
 export class NavbarComponent implements OnInit {
   model: any = { };
-  loggedIn: boolean;
   collapsed: boolean;
+  loginModel: UserLoginRequest;
+  loggedIn:boolean; 
 
-  constructor(private accountService: AccountService,
+  @ViewChild('loginForm') loginForm;
+
+  constructor(private accountServices: AccountService,
               private router: Router) { }
 
   ngOnInit() {
-    this.loggedIn = false;
     this.collapsed = true;
+    this.loginModel = new UserLoginRequest(); 
+    this.signedIn();
   }
 
-  login(): void{
-    console.log(this.model);
-    this.loggedIn = true;
-    this.router.navigateByUrl('/matches');
-    // this.accountService.login(this.model)
-    // .subscribe(
-    //   response =>{
-    //     console.log(response);
-    //     this.loggedIn = true;
-    //   }, error =>{
-    //     console.log(error);
-    //   }
-    // );
+  login(){
+    this.accountServices.login(this.loginModel).subscribe(
+      response => {
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('un', response.un);
+        localStorage.setItem('fn', response.fn);
+        localStorage.setItem('ln', response.ln);
+        localStorage.setItem('url', response.url);
+        this.loggedIn = true;
+        this.router.navigateByUrl('/home');
+        this.loginForm.reset();
+      }
+    );
+  }
+  
+  signedIn(){
+    return this.accountServices.loggedIn();
   }
 
   logout(): void{
+    this.accountServices.logout(localStorage.getItem('un')); 
     this.loggedIn = false;
+    localStorage.clear(); 
     this.router.navigateByUrl('/');
   }
 }
