@@ -27,18 +27,23 @@
               <div class="form-group">
                 <div class="form-group">
                   <input type="text" class="form-control" name="newFirstName" [(ngModel)]="newUser.FirstName"
-                    placeholder="First Name">
+                    placeholder="First Name"
+                    required>
                 </div>
                 <div class="form-group">
                   <input type="text" class="form-control" name="newLastName" [(ngModel)]="newUser.LastName"
-                    placeholder="Last Name">
+                    placeholder="Last Name"
+                    required>
                 </div>
                 <input type="text" class="form-control" name="newUsername" [(ngModel)]="newUser.Username"
-                  placeholder="Username">
+                  placeholder="Username"
+                  required>
+                  
               </div>
               <div class="form-group">
                 <input type="password" class="form-control" name="newPassword" [(ngModel)]="newUser.Password"
-                  placeholder="Password">
+                  placeholder="Password"
+                  required>
               </div>
               <div class="form-group">
                 <input type="number" class="form-control" name="photoId" [(ngModel)] = "newUser.PhotoId"
