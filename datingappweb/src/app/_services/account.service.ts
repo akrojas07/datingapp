@@ -8,6 +8,7 @@ import { UserLoginResponse } from '../_models/_userModels/UserLoginResponse';
 import { CreateNewUserRequest } from '../_models/_userModels/CreateNewUserRequest';
 import { GetUsersByUserIdResponse } from '../_models/_userModels/GetUsersByUserIdResponse';
 import { UpdateProfileRequest } from '../_models/_userModels/UpdateProfileRequest';
+import { GetUserByUsernameResponse } from '../_models/_userModels/GetUserByUsernameResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +28,13 @@ export class AccountService {
     });
     let body = { UserIds: userId};
     return this.http.put<GetUsersByUserIdResponse[]>(this.baseUrl + 'user', body, {headers});
+  }
+
+  getUserByUsername(username:string): Observable<GetUserByUsernameResponse>{
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer '+ localStorage.getItem('token')
+    });
+    return this.http.get<GetUserByUsernameResponse>(this.baseUrl + 'user/' + username,{headers});
   }
 
   login(model: UserLoginRequest): Observable<UserLoginResponse> {

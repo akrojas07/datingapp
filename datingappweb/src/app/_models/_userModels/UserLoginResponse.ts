@@ -4,4 +4,6 @@ export class UserLoginResponse {
     fn: string;
     ln: string;
     url: string;
+    about: string;
+    interests: string;
 }

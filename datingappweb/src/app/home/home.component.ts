@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   signedIn: boolean; 
   registerMode: boolean;
   newUser: CreateNewUserRequest;
+  genderSelected: string;
 
   @ViewChild('registerForm') registerForm;  
 
@@ -28,6 +29,7 @@ export class HomeComponent implements OnInit {
     this.loggedIn(); 
     this.registerMode = false;
     this.newUser = new CreateNewUserRequest();
+    this.genderSelected = "female";
   }
 
   loggedIn(){
@@ -40,7 +42,6 @@ export class HomeComponent implements OnInit {
   }
 
   register(){
-    // console.log(this.newUser.Picture);
     this.accountServices.createNewUser(this.newUser).subscribe(
       response => {
         localStorage.setItem('token', response.token);
@@ -49,7 +50,7 @@ export class HomeComponent implements OnInit {
         localStorage.setItem('ln', response.ln);
         localStorage.setItem('url', response.url);
         this.signedIn = this.accountServices.loggedIn();
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/profile');
         this.registerForm.reset();
       }
     );
