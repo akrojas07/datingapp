@@ -41,9 +41,15 @@
                 <input type="password" class="form-control" name="newPassword" [(ngModel)]="newUser.Password"
                   placeholder="Password" required>
               </div>
+              <!-- (ngModel)="newUser.Location" -->
               <div class="form-group">
-                <input type="text" class="form-control" name="location" [(ngModel)]="newUser.Location"
-                placeholder="Location">
+                <label for="location">
+                  <select name="location" class="form-control" [ngModel]= "''" (ngModelChange) = "newUser.Location = $event"
+                  >
+                    <option value="" selected disabled>Location</option>
+                    <option *ngFor="let city of citiesList" [ngValue] = "city">{{city}}</option>
+                  </select>
+                </label>
               </div>
 
               <fieldset class="form-group">

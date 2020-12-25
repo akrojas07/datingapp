@@ -23,23 +23,21 @@
           </div>
           <form #basicForm="ngForm" (ngSubmit)="updateProfile()">
             <input type="text" name="firstname" class="form-control mt-2" [(ngModel)]="member.FirstName" required
-            (input) = "updateFormStatus()"
-            >
+              (input)="updateFormStatus()">
             <input type="text" name="lastname" class="form-control mt-2" [(ngModel)]="member.LastName" required
-            (input) = "updateFormStatus()"
-            >
-            <input type="text" name = "location" class="form-control mt-2" placeholder="Location"
-            [(ngModel)]="member.Location"
-            (input) = "updateFormStatus()">
+              (input)="updateFormStatus()">
+            <label for="location" class="mt-2">
+              <select name="location" class="form-control" [(ngModel)]="member.Location" [ngModelOptions]="{standalone: true}" (input)="updateFormStatus()">
+                <option value="" selected disabled>Location</option>
+                <option *ngFor="let city of citiesList" [ngValue] = "city" (change)="updateFormStatus()">{{city}}</option>
+              </select>
+            </label>
 
-            <input type = "text" name = "gender" class="form-control mt-2" placeholder="Gender"
-            [(ngModel)] = "this.convertedGender"
-            (input) = "updateFormStatus()">
+            <input type="text" name="gender" class="form-control mt-2" placeholder="Gender"
+              [(ngModel)]="this.convertedGender" (input)="updateFormStatus()">
 
             <input type="password" name="password" class="form-control mt-2" placeholder="Password"
-              [(ngModel)]="member.Password"
-              (input) = "updateFormStatus()"
-              >
+              [(ngModel)]="member.Password" (input)="updateFormStatus()">
 
             <button [disabled]="!formsChanged" class="btn button mt-3 btn-block" (submit)="updateProfile()">
               <strong>Save Changes</strong>
@@ -52,14 +50,11 @@
     <div class="col-7">
       <form #aboutForm="ngForm">
         <h2>About you</h2>
-        <textarea class="form-control" [(ngModel)]="member.About" rows="6"
-        [ngModelOptions]="{standalone: true}"
-        (input) = "updateFormStatus()"
-        ></textarea>
+        <textarea class="form-control" [(ngModel)]="member.About" rows="5" [ngModelOptions]="{standalone: true}"
+          (input)="updateFormStatus()" maxlength="255"></textarea>
         <h2 class="mt-4">Interests</h2>
-        <textarea class="form-control" [(ngModel)]="member.Interests" rows="6"
-        [ngModelOptions]="{standalone: true}"
-        (input) = "updateFormStatus()"></textarea>
+        <textarea class="form-control" [(ngModel)]="member.Interests" rows="5" [ngModelOptions]="{standalone: true}"
+          (input)="updateFormStatus()" maxlength="255"></textarea>
       </form>
     </div>
 

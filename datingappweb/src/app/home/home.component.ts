@@ -5,6 +5,7 @@ import { AccountService} from '../_services/account.service';
 import { GetUsersByUserIdResponse} from '../_models/_userModels/GetUsersByUserIdResponse';
 
 import { CreateNewUserRequest } from '../_models/_userModels/CreateNewUserRequest';
+import {Cities } from '../_services/cities';
 
 
 @Component({
@@ -20,12 +21,17 @@ export class HomeComponent implements OnInit {
   newUser: CreateNewUserRequest;
   genderSelected: string;
 
+  cities: Cities;
+  citiesList: string[];
+
   @ViewChild('registerForm') registerForm;  
 
   constructor(private accountServices: AccountService,
     private router: Router) { }
 
   ngOnInit() {
+    this.cities = new Cities();
+    this.citiesList = this.cities.list;
     this.loggedIn(); 
     this.registerMode = false;
     this.newUser = new CreateNewUserRequest();

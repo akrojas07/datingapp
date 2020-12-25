@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AccountService } from '../_services/account.service';
 import { UpdateProfileRequest } from '../_models/_userModels/UpdateProfileRequest';
-import { calcPossibleSecurityContexts } from '@angular/compiler/src/template_parser/binding_parser';
+import { Cities } from '../_services/cities';
 
 @Component({
   selector: 'app-profile',
@@ -14,13 +14,18 @@ export class ProfileComponent implements OnInit {
   formsChanged:boolean;
   convertedGender: string;
 
+  cities: Cities;
+  citiesList: string[];
+
   @ViewChild('basicForm') basicForm;
   @ViewChild('aboutForm') aboutForm;
 
   constructor(private accountService: AccountService) {}
 
   ngOnInit() {
-    this.member = new UpdateProfileRequest();
+    this.member = new UpdateProfileRequest(); 
+    this.cities = new Cities();
+    this.citiesList = this.cities.list;
     this.member.Username = localStorage.getItem('un');
     this.getUserByUsername();
 
