@@ -49,7 +49,6 @@ export class ProfileComponent implements OnInit {
       this.member.About = user.about;
       this.member.Interests = user.interests;
       this.member.Password = user.password;
-
       this.transformGenderForFrontEnd();
     });
 
@@ -97,7 +96,6 @@ export class ProfileComponent implements OnInit {
     this.accountService.updateProfile(this.member).subscribe((item) => {
       this.formsChanged = false;
       this.changeUpdatedStatus();
-      console.log(this.formsChanged);
       setTimeout(() => {
         this.changeUpdatedStatus();
       }, 4000);

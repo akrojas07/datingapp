@@ -22,7 +22,7 @@ export class AccountService {
     return this.http.post<UserLoginResponse>(this.baseUrl + 'user/new', model);
   }
 
-  getUsersByUserId(userId: any[]): Observable<GetUsersByUserIdResponse[]>{
+  getUsersByUserId(userId: number[]): Observable<GetUsersByUserIdResponse[]>{
     const headers = new HttpHeaders({
       'Authorization': 'Bearer '+ localStorage.getItem('token')
     });
@@ -34,7 +34,7 @@ export class AccountService {
     const headers = new HttpHeaders({
       'Authorization': 'Bearer '+ localStorage.getItem('token')
     });
-    return this.http.get<GetUserByUsernameResponse>(this.baseUrl + 'user/' + username,{headers});
+    return this.http.get<GetUserByUsernameResponse>(this.baseUrl + 'user/username/' + username,{headers});
   }
 
   login(model: UserLoginRequest): Observable<UserLoginResponse> {

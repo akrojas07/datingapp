@@ -1,39 +1,51 @@
 <div class="container">
   <div class="row">
+    <div class="col-12">
+      <h1>New members in your area!</h1>
+    </div>
+  </div>
+  <div class="row mb-5">
     <!-- columns and rows are going to repeat for as many matches as the person has -->
-    <div class="col-4">
+    <div class="col-4 mt-3" *ngFor="let match of newMatches; let i = index">
       <div class="card">
-        <!-- <img> Here is going to be an image pulled from the picsum website and used in the middle -->
+        <img class="card-img-top" src="{{match.photo.url}}" alt="Member Photo">
         <div class="card-body">
           <p class="card-text">
-            HERE IS GOING TO BE A MATCH THAT'S PULLED FROM THE DATABASE
+            {{match.firstName}} <br>
+            {{match.location}}
           </p>
+        </div>
+        <div class="card-footer">
+          Insert like or pass buttons here
         </div>
       </div>
     </div>
-
-    <div class="col-4">
-      <div class="card">
-        <!-- <img> Here is going to be an image pulled from the picsum website and used in the middle -->
-        <div class="card-body">
-          <p class="card-text">
-            HERE IS GOING TO BE A MATCH THAT'S PULLED FROM THE DATABASE
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-4">
-      <div class="card">
-        <!-- <img> Here is going to be an image pulled from the picsum website and used in the middle -->
-        <div class="card-body">
-          <p class="card-text">
-            HERE IS GOING TO BE A MATCH THAT'S PULLED FROM THE DATABASE
-          </p>
-        </div>
-      </div>
-    </div>
-
     
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-12">
+      <h1>Current matches</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4 mt-3" *ngFor="let existing of existingMatchDetail; let i = index">
+      <div class="card">
+        <img class="card-img-top" src="{{existing.photo.url}}" alt="Member Photo">
+        
+        <div class="card-body">
+          <div class="card-text">
+            <p>{{existing.firstName}}</p>
+            <p><em>Location:</em> {{existing.location}}</p>
+          </div>
+        </div>
+        <div class="card-footer">
+          have selected like here - give option to unlike
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
