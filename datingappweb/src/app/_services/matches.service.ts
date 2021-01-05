@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { UserResponse } from '../_models/_matchesModels/UserResponse';
 import { GetNewMatchesRequest} from '../_models/_matchesModels/GetNewMatchesRequest';
 import { MatchResponse} from '../_models/_matchesModels/MatchResponse';
+import { UpsertMatchesRequest } from '../_models/_matchesModels/UpsertMatchesRequest';
 
 @Injectable({
   providedIn: 'root',
@@ -42,7 +43,7 @@ export class MatchesService {
     return this.http.get<MatchResponse[]>(this.baseUrl+'matches/user/'+ userId, {headers});
   }
 
-  upsertMatches(model:any){
+  upsertMatches(model:UpsertMatchesRequest[]){
     const headers = new HttpHeaders({
       'Authorization': 'Bearer '+ localStorage.getItem('token')
     });
