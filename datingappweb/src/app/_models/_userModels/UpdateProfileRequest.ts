@@ -5,4 +5,8 @@ export class UpdateProfileRequest {
     Username: string;
     PhotoId: number;
     Url: string;
+    About: string;
+    Interests: string;
+    Location: string;
+    Gender: boolean;
 }

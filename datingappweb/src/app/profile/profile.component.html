@@ -3,10 +3,10 @@
 
   <div class="row">
     <div class="col-12">
-      <div class="alert alert-warning" *ngIf="basicForm.dirty">
+      <div class="alert alert-warning" *ngIf="formsChanged">
         <strong>You have made changes to your profile. Any unsaved changes will be lost.</strong>
       </div>
-      <div class="alerts" *ngIf="updated">
+      <div class="alert alerts" *ngIf="updated">
         <strong>Your changes have been saved!</strong>
       </div>
     </div>
@@ -15,21 +15,31 @@
   <div class="row">
     <div class="col-5">
       <div class="card">
-        <img src="{{this.member.Url}}" alt="member picture">
+        <img class="card-img-top" src="{{this.member.Url}}" alt="member picture">
 
         <div class="card-body">
           <div class="card-title">
             <strong>Basics</strong>
           </div>
           <form #basicForm="ngForm" (ngSubmit)="updateProfile()">
-            <input type="text" name="firstname" class="form-control mt-2" [(ngModel)]="member.FirstName"
-            required>
-            <input type="text" name="lastname" class="form-control mt-2" [(ngModel)]="member.LastName"
-            required>
-            <input type="password" name="password" class="form-control mt-2" placeholder="Password"
-              [(ngModel)]="member.Password">
+            <input type="text" name="firstname" class="form-control mt-2" [(ngModel)]="member.FirstName" required
+              (input)="updateFormStatus()">
+            <input type="text" name="lastname" class="form-control mt-2" [(ngModel)]="member.LastName" required
+              (input)="updateFormStatus()">
+            <label for="location" class="mt-2">
+              <select name="location" class="form-control" [(ngModel)]="member.Location" [ngModelOptions]="{standalone: true}" (input)="updateFormStatus()">
+                <option value="" selected disabled>Location</option>
+                <option *ngFor="let city of citiesList" [ngValue] = "city" (change)="updateFormStatus()">{{city}}</option>
+              </select>
+            </label>
 
-            <button [disabled]="!basicForm.dirty" class="btn button mt-3 btn-block" (submit)="updateProfile()">
+            <input type="text" name="gender" class="form-control mt-2" placeholder="Gender"
+              [(ngModel)]="this.convertedGender" (input)="updateFormStatus()">
+
+            <input type="password" name="password" class="form-control mt-2" placeholder="Password"
+              [(ngModel)]="member.Password" (input)="updateFormStatus()">
+
+            <button [disabled]="!formsChanged" class="btn button mt-3 btn-block" (submit)="updateProfile()">
               <strong>Save Changes</strong>
             </button>
           </form>
@@ -38,22 +48,17 @@
     </div>
 
     <div class="col-7">
-      <h2>About you</h2>
-      <textarea class="form-control"
-        rows="6">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut numquam maxime minus cumque, eaque laborum, quis ipsa libero at omnis atque consequatur necessitatibus laboriosam tempora cupiditate. At rerum aliquid consequatur.</textarea>
-
-      <h2 class="mt-4">Looking for</h2>
-      <textarea class="form-control" rows="6">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi ipsam obcaecati, placeat temporibus voluptatum minus tenetur cum aliquid cumque suscipit hic beatae! Suscipit libero assumenda eum voluptate deleniti reprehenderit facilis?
-
-        </textarea>
-      <h2 class="mt-4">Interests</h2>
-      <textarea class="form-control" rows="6">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur provident non ullam voluptatem, perspiciatis quae dignissimos eligendi quidem error asperiores deleniti? Enim vitae quod rem recusandae reprehenderit animi voluptatum itaque.
-        </textarea>
+      <form #aboutForm="ngForm">
+        <h2>About you</h2>
+        <textarea class="form-control" [(ngModel)]="member.About" rows="5" [ngModelOptions]="{standalone: true}"
+          (input)="updateFormStatus()" maxlength="255"></textarea>
+        <h2 class="mt-4">Interests</h2>
+        <textarea class="form-control" [(ngModel)]="member.Interests" rows="5" [ngModelOptions]="{standalone: true}"
+          (input)="updateFormStatus()" maxlength="255"></textarea>
+      </form>
     </div>
 
 
 
 
   </div>
-
-</div>
