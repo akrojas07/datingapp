@@ -22,33 +22,65 @@
           <hr>
           <div class="card-body">
             <form #registerForm="ngForm" (ngSubmit)="register()">
-
+              <div class="form-group">
+                <input type="text" class="form-control" name="newFirstName" [(ngModel)]="newUser.FirstName"
+                  placeholder="First Name" required>
+              </div>
 
               <div class="form-group">
-                <div class="form-group">
-                  <input type="text" class="form-control" name="newFirstName" [(ngModel)]="newUser.FirstName"
-                    placeholder="First Name"
-                    required>
-                </div>
-                <div class="form-group">
-                  <input type="text" class="form-control" name="newLastName" [(ngModel)]="newUser.LastName"
-                    placeholder="Last Name"
-                    required>
-                </div>
-                <input type="text" class="form-control" name="newUsername" [(ngModel)]="newUser.Username"
-                  placeholder="Username"
-                  required>
-                  
+                <input type="text" class="form-control" name="newLastName" [(ngModel)]="newUser.LastName"
+                  placeholder="Last Name" required>
               </div>
+
+              <div class="form-group">
+                <input type="text" class="form-control" name="newUsername" [(ngModel)]="newUser.Username"
+                  placeholder="Username" required>
+              </div>
+
               <div class="form-group">
                 <input type="password" class="form-control" name="newPassword" [(ngModel)]="newUser.Password"
-                  placeholder="Password"
-                  required>
+                  placeholder="Password" required>
               </div>
+              <!-- (ngModel)="newUser.Location" -->
               <div class="form-group">
-                <input type="number" class="form-control" name="photoId" [(ngModel)] = "newUser.PhotoId"
-                placeholder="Photo Id">
+                <label for="location">
+                  <select name="location" class="form-control" [ngModel]= "''" (ngModelChange) = "newUser.Location = $event"
+                  >
+                    <option value="" selected disabled>Location</option>
+                    <option *ngFor="let city of citiesList" [ngValue] = "city">{{city}}</option>
+                  </select>
+                </label>
               </div>
+
+              <fieldset class="form-group">
+                <div class="row">
+                  <div class="col-sm-10">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="gender" id="f" [(ngModel)]="genderSelected" 
+                      value= "female" 
+                      >
+                      <label class="form-check-label" for="female" >
+                        Female
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="gender" id="t" [(ngModel)]="genderSelected"
+                      
+                      value="male" 
+                      >
+                      <label class="form-check-label" for="t">
+                        Male
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+
+              <div class="form-group">
+                <input type="number" class="form-control" name="photoId" [(ngModel)]="newUser.PhotoId"
+                  placeholder="Photo Id">
+              </div>
+
               <button class="btn buttons mb-3" type="submit" (submit)="register()">
                 Sign up
               </button>

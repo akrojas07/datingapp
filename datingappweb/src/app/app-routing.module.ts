@@ -20,7 +20,8 @@ const routes: Routes = [
       {path: 'matches', component: MatchesComponent},
       {path: 'profile', component: ProfileComponent},
       {path: 'profile/:id', component: MemberdetailComponent},
-      {path: 'chats', component: ChatsComponent}
+      {path: 'chats', component: ChatsComponent},
+      {path: 'chats/:id', component: ChatsComponent}
     ]
   },
   {path: '**', component: HomeComponent, pathMatch: 'full'}

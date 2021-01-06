@@ -13,6 +13,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ChatsComponent } from './chats/chats.component';
 import { MemberdetailComponent} from './matches/memberdetail/memberdetail.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { NgxPopper } from 'angular-popper';
 
 @NgModule({
   declarations: [								
@@ -30,7 +31,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    CollapseModule.forRoot()
+    CollapseModule.forRoot(),
+    NgxPopper
   ],
   providers: [],
   bootstrap: [AppComponent]
