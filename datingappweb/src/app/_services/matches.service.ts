@@ -47,7 +47,7 @@ export class MatchesService {
     const headers = new HttpHeaders({
       'Authorization': 'Bearer '+ localStorage.getItem('token')
     });
-
-    return this.http.put(this.baseUrl+'matches', model,{headers});
+    let body = {UpsertMatches: model};
+    return this.http.put(this.baseUrl+'matches', body,{headers});
   }
 }

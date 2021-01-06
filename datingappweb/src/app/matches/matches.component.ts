@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatchResponse } from '../_models/_matchesModels/MatchResponse';
 import { MatchesService } from '../_services/matches.service';
 import { AccountService } from '../_services/account.service';
@@ -13,7 +13,7 @@ import { UpsertMatchesRequest } from '../_models/_matchesModels/UpsertMatchesReq
   templateUrl: './matches.component.html',
   styleUrls: ['./matches.component.scss'],
 })
-export class MatchesComponent implements OnInit {
+export class MatchesComponent implements OnInit, OnDestroy {
   matchRequest: GetNewMatchesRequest;
   existingMatches: MatchResponse[];
   newMatches: UserResponse[];
@@ -21,17 +21,29 @@ export class MatchesComponent implements OnInit {
   upsertMatch: UpsertMatchesRequest;
   matchesList: UpsertMatchesRequest[];
   username: string;
+  
+
+  matchesListEmpty:boolean;
 
   constructor(
     private matchService: MatchesService,
     private accountService: AccountService
   ) {}
 
+  ngOnDestroy(): void {
+    if(this.matchesList.length > 0)
+    {
+      this.upsertMatches(this.matchesList);
+    }
+
+  }
+
   ngOnInit() {
     this.matchesList = [];
     this.existingMatches = [];
     this.newMatches = [];
     this.existingMatchDetail = [];
+    this.matchesListEmpty = true;
     this.matchRequest = new GetNewMatchesRequest();
     this.upsertMatch = new UpsertMatchesRequest();
     this.username = localStorage.getItem('un');
@@ -53,6 +65,7 @@ export class MatchesComponent implements OnInit {
         newPotentialMatches.forEach((element) => {
           this.validatePhoto(element.photo);
           this.newMatches.push(element);
+          this.matchesListEmpty = false;
         });
       });
   }
@@ -106,15 +119,18 @@ export class MatchesComponent implements OnInit {
     this.upsertMatch.SecondUserId = matchedUserId; 
     this.upsertMatch.Liked = response;
     this.matchesList.push(this.upsertMatch);
+
+    if(type === 'existing')
+    {
+      this.upsertMatch.Id = this.existingMatches[index].id;
+    }
     
     this.removeMatches(index, type, this.upsertMatch.Liked);
 
   }
 
   upsertMatches(model: UpsertMatchesRequest[]) {
-    this.matchService.upsertMatches(model).subscribe((response) => {
-      console.log(response);
-    });
+    this.matchService.upsertMatches(model).subscribe();
   }
 
   validatePhoto(photoInput: PhotoResponse) {
