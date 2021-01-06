@@ -24,6 +24,7 @@ export class MatchesComponent implements OnInit, OnDestroy {
   
 
   matchesListEmpty:boolean;
+  existingMatchListEmpty: boolean;
 
   constructor(
     private matchService: MatchesService,
@@ -44,6 +45,7 @@ export class MatchesComponent implements OnInit, OnDestroy {
     this.newMatches = [];
     this.existingMatchDetail = [];
     this.matchesListEmpty = true;
+    this.existingMatchListEmpty = true;
     this.matchRequest = new GetNewMatchesRequest();
     this.upsertMatch = new UpsertMatchesRequest();
     this.username = localStorage.getItem('un');
@@ -81,6 +83,7 @@ export class MatchesComponent implements OnInit, OnDestroy {
             element.secondUserId,
           ]);
         });
+        this.existingMatchListEmpty = false;
       });
   }
 
