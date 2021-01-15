@@ -1,9 +1,18 @@
 <div class="row">
-  <div class="col-4">
-    list of messages
+  <div class="col-md-3 smallUI chatsBox">
+    <div *ngFor="let chat of uniqueUserChats">
+      <div class="card mt-2">
+        <div class="card-body">
+          {{chat.dateSent | date:'short'}}
+          <br>
+          {{chat.message | slice:0:20}} ...
+        </div>
+      </div>
+
+    </div>
   </div>
 
-  <div class="col-8">
-    Current message
+  <div class="col-md-7 smallUI ml-2" >
+    <app-currentChat></app-currentChat>
   </div>
 </div>
