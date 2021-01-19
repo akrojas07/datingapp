@@ -1,7 +1,12 @@
 .chatsBox{
     min-height: 1vh;
-    overflow-y:scroll;
+    overflow-y:hidden;
     float:left;
+}
+
+.directBox{
+    min-height: 10vh;
+    overflow: hidden;
 }
 
 .goRight{ 

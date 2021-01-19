@@ -88,6 +88,7 @@ export class MatchesComponent implements OnInit, OnDestroy {
   }
 
   getUserDetailsByUserId(userIds: number[]) {
+
     this.accountService.getUsersByUserId(userIds).subscribe((detail) => {
       detail.forEach((item) => {
         if (item.username !== this.username) {
@@ -137,15 +138,17 @@ export class MatchesComponent implements OnInit, OnDestroy {
   }
 
   validatePhoto(photoInput: PhotoResponse) {
-    if (
-      photoInput.url !== null &&
-      photoInput.url !== '' &&
-      photoInput.url !== undefined
+    if (  photoInput !== null &&
+          photoInput.url !== null &&
+          photoInput.url !== '' &&
+          photoInput.url !== undefined
     ) {
       return photoInput.url;
     } else {
       photoInput.url = 'assets/images/No_Image.png';
       return photoInput.url;
     }
+
+
   }
 }
