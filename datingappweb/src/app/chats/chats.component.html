@@ -1,18 +1,67 @@
+<p class="large text-center">Chats</p>
+<hr>
 <div class="row">
-  <div class="col-md-3 smallUI chatsBox">
+  <div class="col-md-4 smallUI chatsBox">
     <div *ngFor="let chat of uniqueUserChats">
-      <div class="card mt-2">
+      <div class="card mt-2" (click)="updateCurrentMatchId(chat.matchId)">
         <div class="card-body">
           {{chat.dateSent | date:'short'}}
           <br>
-          {{chat.message | slice:0:20}} ...
+          {{chat.firstUsername}} said:
+          <br>
+          {{chat.message | slice:0:20}}...
         </div>
       </div>
-
     </div>
   </div>
 
-  <div class="col-md-7 smallUI ml-2" >
-    <app-currentChat></app-currentChat>
+  <div class="col smallUI ml-2">
+    <div class="row">
+      <div class="col-12" *ngIf="showRetrievalChatAddError">
+        <div class="alert alert-danger" role="alert">
+          {{retrievalChatAddError}}
+        </div>
+      </div>
+      <div class="col-12" *ngIf="showRetrievalMatchError">
+        <div class="alert alert-danger" role="alert">
+          {{retrievalMatchError}}
+        </div>
+      </div>
+      <div class="col-12" *ngIf="showRetrievalUserError">
+        <div class="alert alert-danger" role="alert">
+          {{retrievalUserError}} 
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div *ngFor="let chat of userChats">
+          <div *ngIf="chat.matchId === this.currentMatchId">
+            <div class="card mt-2">
+              <div class="card-body">
+               <b> {{chat.firstUsername}}</b> <span class="goRight">{{chat.dateSent | date:'short'}}
+                </span>
+                <br>
+                <hr>
+                {{chat.message}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <form #chatsForm="ngForm">
+      <div class="row mt-3">
+        <div class="col-12">
+          <textarea class="inputBox"[(ngModel)]="newChat.message" name="newMessage"></textarea>
+        </div>
+        <div class="col-12 text-center">
+          <button class="btn btn-primary" (click)="addNewChat()">
+            Send
+          </button>
+        </div>
+      </div>
+
+    </form>
   </div>
 </div>

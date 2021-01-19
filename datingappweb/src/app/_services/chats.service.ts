@@ -15,7 +15,10 @@ export class ChatsService {
   constructor(private http: HttpClient) {}
 
   addChat(body:AddChatsRequest){
-    return this.http.post(this.baseUrl+'newchat', body);
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer '+ localStorage.getItem('token')
+    });
+    return this.http.post(this.baseUrl+'newchat', body, {headers});
   }
 
   getChatsByMatchId(matchId: number){

@@ -13,7 +13,6 @@ import { ProfileComponent } from './profile/profile.component';
 import { ChatsComponent } from './chats/chats.component';
 import { MemberdetailComponent} from './matches/memberdetail/memberdetail.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { CurrentChatComponent } from './chats/currentChat/currentChat.component';
 import { NgxPopper } from 'angular-popper';
 
 @NgModule({
@@ -24,8 +23,7 @@ import { NgxPopper } from 'angular-popper';
       ProfileComponent,
       ChatsComponent,
       MemberdetailComponent,
-      NavbarComponent,
-      CurrentChatComponent
+      NavbarComponent
    ],
   imports: [
     BrowserModule,
