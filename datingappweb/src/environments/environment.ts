@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   userApiUrl: 'http://localhost:55387/',
   matchesApiUrl:'http://localhost:60516/',
-  chatsApiUrl:''
+  chatsApiUrl:'http://localhost:64441/chats/'
 };
 
 /*

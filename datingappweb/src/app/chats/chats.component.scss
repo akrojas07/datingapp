@@ -1,0 +1,25 @@
+.chatsBox{
+    min-height: 1vh;
+    overflow-y:hidden;
+    float:left;
+}
+
+.directBox{
+    min-height: 10vh;
+    overflow: hidden;
+}
+
+.goRight{ 
+    float:right;
+    color: rgb(182,226,211);
+}
+
+.inputBox{
+    width: 100%;
+    border: 0px none;
+}
+
+.large{
+    font-size: x-large;
+    font-weight: 650;
+}
